@@ -18,6 +18,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -148,6 +149,12 @@ public class PhoenixSupport {
         jfxDialogLayout.setBody(new Text(contain));
         JFXDialog jfxDialog = new JFXDialog(sp, jfxDialogLayout, JFXDialog.DialogTransition.TOP);
         JFXButton okay = new JFXButton("रद्ध करा");
+        okay.setOnKeyPressed((e) -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                jfxDialog.close();
+            }
+        });
+        jfxDialog.setOnDialogOpened(e -> okay.requestFocus());
         okay.setPrefWidth(110);
         okay.setStyle("-fx-background-color: #3E4A4F; -fx-text-fill: white;");
         okay.setButtonType(JFXButton.ButtonType.RAISED);

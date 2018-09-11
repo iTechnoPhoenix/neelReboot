@@ -64,7 +64,6 @@ public class UnitsController implements Initializable {
         save();
     }
 
-    @FXML
     private void btn_search_key(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             save();
@@ -104,21 +103,27 @@ public class UnitsController implements Initializable {
 
     public void save() {
         if (PhoenixSupport.isValidate(txt_maxunit, txt_minunit, txt_price)) {
-            if (PhoenixSupport.getInteger(txt_maxunit.getText()) > PhoenixSupport.getInteger(txt_minunit.getText())) {
-                Unit u = new Unit();
-                u.setMax(PhoenixSupport.getInteger(txt_maxunit.getText()));
-                u.setMin(PhoenixSupport.getInteger(txt_minunit.getText()));
-                u.setUnitprice(PhoenixSupport.getDouble(txt_price.getText()));
-                if (!unitList.contains(u)) {
-                    unitsdb.addUnits(u, window);
-                    refreshTable();
+            if (PhoenixSupport.getInteger(txt_maxunit.getText()) != 0 && PhoenixSupport.getInteger(txt_maxunit.getText()) != 0 && PhoenixSupport.getInteger(txt_price.getText()) != 0) {
+                if (PhoenixSupport.getInteger(txt_maxunit.getText()) > PhoenixSupport.getInteger(txt_minunit.getText())) {
+                    Unit u = new Unit();
+                    u.setMax(PhoenixSupport.getInteger(txt_maxunit.getText()));
+                    u.setMin(PhoenixSupport.getInteger(txt_minunit.getText()));
+                    u.setUnitprice(PhoenixSupport.getDouble(txt_price.getText()));
+                    if (!unitList.contains(u)) {
+                        unitsdb.addUnits(u, window);
+                        refreshTable();
+                    } else {
+                        PhoenixSupport.Error("भरलेली माहिती पहिलीच जतन केली आहे.", window);
+                    }
+                    clear();
                 } else {
-                    PhoenixSupport.Error("भरलेली माहिती पहिलीच जतन केली आहे.", window);
+
                 }
-                clear();
             } else {
+                PhoenixSupport.Error("कमाल / किमान युनिट 0 आहे.", window);
                 PhoenixSupport.Error("कमाल युनिट हि किमान युनिट पेक्षा छोटी आहे.", window);
             }
+
         } else {
             PhoenixSupport.Error("सर्व माहिती भरा", window);
         }
@@ -172,7 +177,7 @@ public class UnitsController implements Initializable {
                     vb.getChildren().addAll(txtMin, txtMax, txtUnit);
                     JFXButton btnSave = new JFXButton("जतन");
                     btnSave.getStyleClass().add("btn-search");
-                    JFXButton btnClose = new JFXButton("राध");
+                    JFXButton btnClose = new JFXButton("रद्ध");
                     btnClose.getStyleClass().add("btn-cancel");
                     JFXDialog dialog = Support.getDialog(window, new Label("युनिट बदल करणे"), vb, btnSave, btnClose);
                     btnSave.setOnAction(e -> {

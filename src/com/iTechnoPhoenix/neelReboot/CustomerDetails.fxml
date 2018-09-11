@@ -39,7 +39,6 @@
                <children>
                   <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" text="नाव / मीटर क्रमांक :" HBox.hgrow="ALWAYS" />
                   <JFXTextField fx:id="txt_search" maxWidth="350.0" HBox.hgrow="ALWAYS" />
-                  <JFXButton onAction="#btn_search" onKeyPressed="#btn_search_key" style="-fx-background-color: #4BB89B;" text="शोध करा" textFill="WHITE" HBox.hgrow="ALWAYS" />
                   <JFXButton onAction="#btn_new_customer" style="-fx-background-color: #1F9CFF;" text="नवीन ग्राहक" textFill="WHITE">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">

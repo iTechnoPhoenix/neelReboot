@@ -4,7 +4,6 @@ import com.iTechnoPhoenix.database.CustomerOperation;
 import com.iTechnoPhoenix.database.MeterOperation;
 import com.iTechnoPhoenix.model.Customer;
 import com.iTechnoPhoenix.model.Meter;
-import com.iTechnoPhoenix.model.Unit;
 import com.iTechnoPhoenix.neelSupport.PhoenixSupport;
 import com.iTechnoPhoenix.neelSupport.Support;
 import com.jfoenix.controls.JFXButton;
@@ -34,6 +33,8 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -83,6 +84,12 @@ public class CustomerController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         meterlist = FXCollections.observableArrayList();
+        txt_address.setOnKeyPressed((e) -> {
+            if (e.getCode() == KeyCode.TAB) {
+                txt_meter.requestFocus();
+            }
+
+        });
         createMeterTabel();
 
     }
@@ -105,6 +112,15 @@ public class CustomerController implements Initializable {
         txt_metertable.getColumns().addAll(tc_action, tc_meter, tc_connnection, tc_currentReading, tc_outstanding, tc_deposit);
         txt_metertable.setRoot(root);
         txt_metertable.setShowRoot(false);
+    }
+
+    @FXML
+    private void btn_key_meter_add(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            Add_meter();
+
+        }
+
     }
 
     public class ActionCell extends JFXTreeTableCell<Meter, Integer> {
@@ -206,6 +222,10 @@ public class CustomerController implements Initializable {
 
     @FXML
     void btn_add_meter(ActionEvent event) {
+        Add_meter();
+    }
+
+    private void Add_meter() {
         if (PhoenixSupport.isValidate(txt_meter, txt_current_reading)) {
             Meter m = new Meter();
             m.setMetor_num(txt_meter.getText());
@@ -225,7 +245,6 @@ public class CustomerController implements Initializable {
         txt_balance.clear();
         txt_current_reading.clear();
         txt_date.getEditor().clear();
-
         txt_deposit.clear();
     }
 
@@ -234,6 +253,8 @@ public class CustomerController implements Initializable {
         txt_email.clear();
         txt_mobile.clear();
         txt_address.clear();
+        meterlist.clear();
+        txt_metertable.refresh();
         clearMeter();
         meterlist.clear();
     }

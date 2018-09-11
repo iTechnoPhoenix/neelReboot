@@ -188,7 +188,7 @@ public class UserController implements Initializable {
                     vb.getChildren().addAll(txtName, cbRole);
                     JFXButton btnSave = new JFXButton("जतन");
                     btnSave.getStyleClass().add("btn-search");
-                    JFXButton btnClose = new JFXButton("राध");
+                    JFXButton btnClose = new JFXButton("रद्ध");
                     btnClose.getStyleClass().add("btn-cancel");
                     JFXDialog dialog = Support.getDialog(window, new Label("युनिट बदल करणे"), vb, btnSave, btnClose);
                     btnSave.setOnAction(e -> {

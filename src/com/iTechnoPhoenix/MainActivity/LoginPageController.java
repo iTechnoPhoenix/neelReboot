@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.iTechnoPhoenix.MainActivity;
 
 import com.iTechnoPhoenix.database.UserOperation;
@@ -47,7 +42,7 @@ public class LoginPageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lbl_softwareName.setText("Neel (Grampanchayat palidevad) Sukapur. Developed by iTechnoPhoenix");
+        lbl_softwareName.setText("सुकापूर ग्रामपंचायत");
     }
 
     @FXML
@@ -75,6 +70,7 @@ public class LoginPageController implements Initializable {
             if (up.login(txt_username.getText(), txt_password.getText()) != null) {
                 showWindow(event);
             } else {
+
                 PhoenixSupport.Error("Invalid User", window);
             }
         } else {
@@ -106,7 +102,7 @@ public class LoginPageController implements Initializable {
             Scene ss = new Scene(fl.load());
             Stage stage = new Stage();
             stage.setScene(ss);
-            stage.setTitle("Neel (Grampanchayat palidevad) Sukapur. Developed by iTechnoPhoenix");
+            stage.setTitle("Neel (सुकापूर ग्रामपंचायत). Developed by iTechnoPhoenix");
             stage.setMaximized(true);
             stage.show();
         } catch (IOException ex) {
@@ -121,7 +117,7 @@ public class LoginPageController implements Initializable {
             FXMLLoader fl = new FXMLLoader(getClass().getResource("MainActivity.fxml"));
             Scene ss = new Scene(fl.load());
             Stage stage = new Stage();
-            stage.setTitle("Neel (Grampanchayat palidevad) Sukapur. Developed by iTechnoPhoenix");
+            stage.setTitle("Neel (सुकापूर ग्रामपंचायत). Developed by iTechnoPhoenix");
             stage.setScene(ss);
             stage.setMaximized(true);
             stage.show();
