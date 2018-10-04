@@ -171,21 +171,25 @@ public class ReceiptTransactionController implements Initializable {
                             }
 
                             if (receipt != null) {
-                                if (billList.get(0).getSt() == 3) {
-                                    PhoenixSupport.Info("ह्या बिलाची रक्कम आधीच मिळाली आहे", "पावती व्यवहार", window);
-                                    cancel();
-                                } else if (billList.get(0).getSt() == 5) {
-                                    if (receipt.getCheq_no() != null) {
-                                        if (!faildb.checkFailed(receipt.getCheq_no())) {
-                                            lbl_preious_paid_amt.setText(String.valueOf(receipt.getAmount()));
+                                switch (billList.get(0).getSt()) {
+                                    case 3:
+                                        PhoenixSupport.Info("ह्या बिलाची रक्कम आधीच मिळाली आहे", "पावती व्यवहार", window);
+                                        cancel();
+                                        break;
+                                    case 5:
+                                        if (receipt.getCheq_no() != null) {
+                                            if (!faildb.checkFailed(receipt.getCheq_no())) {
+                                                lbl_preious_paid_amt.setText(String.valueOf(receipt.getAmount()));
+                                            } else {
+                                                lbl_preious_paid_amt.setText(String.valueOf(grandtotal - remaining));
+                                            }
                                         } else {
-                                            lbl_preious_paid_amt.setText(String.valueOf(grandtotal - remaining));
+                                            lbl_preious_paid_amt.setText(String.valueOf(receipt.getAmount()));
                                         }
-                                    } else {
-                                        lbl_preious_paid_amt.setText(String.valueOf(receipt.getAmount()));
-                                    }
-                                } else {
-                                    lbl_preious_paid_amt.setText("००");
+                                        break;
+                                    default:
+                                        lbl_preious_paid_amt.setText("००");
+                                        break;
                                 }
                             } else {
                                 lbl_preious_paid_amt.setText("००");
